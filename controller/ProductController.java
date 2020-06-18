@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.merlind.merlindbatik.dao.ProductRepo;
@@ -15,6 +16,7 @@ import com.merlind.merlindbatik.entity.Product;
 import com.merlind.merlindbatik.service.ProductService;
 
 @RestController
+@RequestMapping("/products")
 @CrossOrigin
 public class ProductController {
 
@@ -54,5 +56,12 @@ public class ProductController {
 	public Product getProductByProductName(@PathVariable String productName) {
 		return productRepo.findByProductName(productName);
 	}
+	
+	@GetMapping("/products/custom")
+	public Product customQueryGet(){
+		return productRepo.findProductByMinPrice(100000, "Batik Tulis");
+	}
+	
+	
 
 }
